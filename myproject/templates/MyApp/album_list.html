@@ -1,0 +1,36 @@
+{% extends "MyApp/base.html" %}
+{% block body_block %}
+<h2>This is Album List</h2>
+{% comment %} {{artist_info}} {% endcomment %}
+First Name = {{artist_info.first_name}} <br>
+Last  Name = {{artist_info.last_name}}<br>
+Instrument ={{artist_info.instrument}}<br>
+Artist Raing = {{artist_rating.num_stars__avg}} <br>
+
+{% comment %} <a href="{% url "first_app:edit_artist" artist_id = artist_info.id %}" class= "btn btn-success btn-sm"> EDIT </a> {% endcomment %}
+{% comment %} <a href="{% url "first_app:edit_artist" artist_id = artist_info.id %}" class="btn btn-success btn-sm"> EDIT </a> {% endcomment %}
+<a href='{% url "first_app:edit_artist" artist_id=artist_info.id %}' class="btn btn-success btn-sm"> EDIT </a>
+
+
+ 
+<table class = "table table-border">
+    <tr>
+        <th> Album Name </th>
+        <th> Releases Date </th>
+        <th> Rating </th>
+    </tr>
+    {% for album in album_list %}
+    <tr>
+        <td><a href="{% url 'first_app:edit_album' album_id=album.id %}">{{album.name}} </a></td>
+        <td>{{album.release_date}}</td>
+        <td>{{album.num_stars}}</td>
+    </tr>
+    
+    {% endfor %}
+</table>
+<br>
+<a href="{% url 'first_app:delete_artist' artist_id=artist_info.id %}" onclick="return alert("Wanna delete this Musician?")" class="btn btn-danger"> Delete</a>
+
+
+ 
+{% endblock body_block %}
